@@ -1,0 +1,10 @@
+tipoTabla:C:Tipo de la tabla:10
+versionTabla:C:Version de la tabla:10
+name:C:Nombre del output:50
+fuentes:L:Lista de fuentes:20:100
+includes:L:Lista de includes:20:100
+outherDirInclude:L:Lista de otros includes:20:100
+includesForInstall:L:Lista de includes para instalar:20:100
+outputLibInstall:C:Directorio de instalacion:200
+outputIncludeInstall:C:Directorio de inst includes:200
+

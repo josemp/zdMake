@@ -1,0 +1,6 @@
+name: prueba
+fuentes: prueba.c: prueba1.c
+includes: prueba.h: prueba1.h
+outherDirInclude: /usr/local/include: /usr/local/zdat/include
+outherDirLib: /usr/local/lib: /usr/local/zdat/lib
+outherLibs: -lzstd: -lyoquese

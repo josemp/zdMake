@@ -1,0 +1,66 @@
+ROOT_DIRECTORY=*/
+ROOT_DIRECTORY_LIBS=*.lib/
+#make install DIR_INSTALL=/tmp
+DIRLIBS_DIR:= $(filter-out .,$(patsubst %/,%,${sort ${dir ${wildcard ${ROOT_DIRECTORY_LIBS}}}}))
+NAME_LIB := libzlStd.a
+DIRLIBS:= MiLog.lib  MsiAlta.lib varios.lib MiTimer.lib MiSel.lib MiCache.lib msgGen.lib ConvierteFedicon.lib EnviaPedidoAix.lib MiCurses.lib MiEvento.lib  MiMysql.lib MiProc.lib MiProcNew.lib  MiSocket.lib checkFedi.lib configtab.lib crc32.lib fedifaltas.lib general.lib  puertosAlm.lib
+
+DIRPROG:= 
+rwildcard = $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
+
+COSAS := $(call rwildcard,*.lib,*.o)
+BUILD_DIRPROG := $(DIRPROG:%=build-%)
+CLEAN_DIRPROG := $(DIRPROG:%=clean-%)
+INSTALL_DIRPROG := $(DIRPROG:%=install-%)
+
+BUILD_DIRLIBS = $(DIRLIBS_DIR:%=build-%)
+CLEAN_DIRLIBS = $(DIRLIBS_DIR:%=clean-%)
+
+INSTALL_DIRLIBS = $(DIRLIBS_DIR:%=install-%)
+
+LISTA_LIBS := $(filter-out lib/$(NAME_LIB),$(wildcard lib/*.a))
+#INSTALL_DIRLIBS = $(filter-out lib/$(NAME_LIB),$(INSTALL_DIRLIBST))
+
+lista: $(BUILD_DIRLIBS) $(BUILD_DIRPROG) $(INSTALL_DIRLIBS) install
+
+clean: $(CLEAN_DIRLIBS) $(CLEAN_DIRPROG)
+
+install: $(NAME_LIB)
+
+$(NAME_LIB): $(COSAS)
+	- rm -f lib/$@
+	ar -rf lib/$@ $^
+
+#$(NAME_LIB): $(LISTA_LIBS)
+#- rm -f lib/$@
+#ar -rf lib/$@ $^
+
+despliegue:
+	cp include/* /usr/local/zl/include
+	cp lib/* /usr/local/zl/lib
+
+$(INSTALL_DIRLIBS): 
+	$(MAKE) -C $(@:install-%=%) install DIR_INSTALL_LIB=../lib  DIR_INSTALL_INCLUDE=../include 
+
+$(INSTALL_DIRPROG): 
+	$(MAKE) -C $(@:install-%=%) install DIR_INSTALL=../bin
+
+$(BUILD_DIRPROG): 
+	$(MAKE) -C $(@:build-%=%)
+
+$(CLEAN_DIRPROG): 
+	$(MAKE) -C $(@:clean-%=%) clean
+
+$(BUILD_DIRLIBS): 
+	$(MAKE) -C $(@:build-%=%)
+
+$(CLEAN_DIRLIBS): 
+	$(MAKE) -C $(@:clean-%=%) clean
+cosa:
+	@echo $(DIRLIBS_DIR)
+cosa1:
+	@echo $(LISTA_LIBS)
+cosa2:
+	@echo $(INSTALL_DIRLIBS)
+cosa3:
+	@echo $(COSAS)

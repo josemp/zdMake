@@ -1,0 +1,8 @@
+tipoTabla: 1
+versionTabla: 00.01
+name: listaTest
+fuentes: lista.c listaTest.c
+includes: lista.h 
+outherDirInclude:
+outherDirLib: 
+outherLibs: 

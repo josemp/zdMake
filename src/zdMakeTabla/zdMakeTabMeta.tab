@@ -1,0 +1,6 @@
+#registro de tipos de makefiles
+tipo:C:tipo de makefile:10
+nombre:C:nombre abreviado:20
+descripcion:C:descripcion:50
+generaTabla:Y:Generar Tabla:int
+generaMakefile:Y:Genera makefile:int
