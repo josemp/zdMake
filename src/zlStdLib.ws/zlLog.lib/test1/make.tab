@@ -1,8 +1,0 @@
-tipoTabla: 1
-versionTabla: 00.01
-name: test1
-fuentes: test1.c 
-includes: 
-outherDirInclude: .. 
-outherDirLib: ..
-outherLibs: -lzlLog

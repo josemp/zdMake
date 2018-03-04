@@ -78,7 +78,7 @@ fprintf(ou,"$(OBJETOS):$(FUENTEOS) $(INCLUDES)\n");
 
 fprintf(ou,"\n$(LIBRARY_NAME): $(OBJETOS)\n");
 fprintf(ou,"\t- rm -f $(LIBRARY_NAME)\n");
-fprintf(ou,"\t tar -rf $@ $^\n");
+fprintf(ou,"\t ar -rf $@ $^\n");
 
 fprintf(ou,"\nclean:\n");
 fprintf(ou,"\t - rm -f $(OBJETOS) $(LIBRARY_NAME)\n");

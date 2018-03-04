@@ -83,7 +83,7 @@ fprintf(ou,"$(OBJETOS):$(FUENTES) $(INCLUDES)\n");
 fprintf(ou,"$(NAME): $(OBJETOS)\n");
 fprintf(ou,"\t$(CC) $(LDFLAGS)  $(OBJETOS) $(LDLIBS) -o $(NAME)\n");
 fprintf(ou,"\nclean:\n");
-fprintf(ou,"\t - rm -f $(OBJETOS) $(PROGRAM_OUTPUT)\n");
+fprintf(ou,"\t - rm -f $(OBJETOS) $(NAME)\n");
 fclose(ou);
 return(0);
 
