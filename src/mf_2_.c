@@ -12,8 +12,6 @@ metaTab_t *getMetaTab_mf2();
 int mf2Lee(char *nombre, mf2_t *mf2);
 int _mf2GeneraMakefile(mf2_t *mf2,char *nombreFicheroOutput );
 
-char *pathSufijo(char *pathOriginal,char *descriError,char*output);
-char *pathDir(char *pathOriginal,char *descriError,char *output);
 
 int mf2GeneraMakefile(char *nombreFicheroInput, char *nombreFicheroOutput)
 {
@@ -138,7 +136,7 @@ return(0);
 
 
 }
-
+/*
 char *pathSufijo(char *pathOriginal,char *descriError,char *output)
 {
  char path[200+1];
@@ -164,7 +162,7 @@ char *pathDir(char *pathOriginal,char *descriError,char *output)
    {printf("%s  = <%s> no valido\n",descriError,pathOriginal);return(NULL);}
    strcpy(output,dirName);
 }
-
+*/
 
 int mf2GeneraTabla(char *namefile,char *tipo,char *version)
 {
