@@ -4,9 +4,9 @@ NAME    := zdMake
 
 # fuentes e includes del proyecto
 
-FUENTES  :=  zdMake.c zdMakeTabLista.c mf_1_.c mf_2_.c mf_B_.c 
+FUENTES  :=  zdMake.c zdMakeTabLista.c mf_1_.c mf_2_.c mf_B_.c zdMakeTabUtil.c
 
-INCLUDES :=  zdMakeTabLista.h  mf_1_.h mf_2_.h mf_B_.h
+INCLUDES :=  zdMakeTabLista.h  mf_1_.h mf_2_.h mf_B_.h zdMakeTabUtil.h
 
 # directorios e includes externos
 

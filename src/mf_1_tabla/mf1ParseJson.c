@@ -36,6 +36,10 @@ parseItemArray(char *padre, cJSON *item,int contador,mf1_t *mf1)
      && contador <20)
        sprintf(mf1->includes[contador],"%.*s",100,item->valuestring);
 
+ if (    strcmp(padre,"proyectos")==0
+     && contador <20)
+       sprintf(mf1->proyectos[contador],"%.*s",100,item->valuestring);
+
  if (    strcmp(padre,"outherDirInclude")==0
      && contador <20)
        sprintf(mf1->outherDirInclude[contador],"%.*s",100,item->valuestring);

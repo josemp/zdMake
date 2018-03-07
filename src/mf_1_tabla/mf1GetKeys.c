@@ -53,6 +53,12 @@ if (key1!=NULL &&  strcmp(key,"includes")==0 && atoi(key1)>0 && atoi(key1)<20)
       return(0);
 }
 
+if (key1!=NULL &&  strcmp(key,"proyectos")==0 && atoi(key1)>0 && atoi(key1)<20)
+{
+      strncpy(mf1->proyectos[atoi(key1)],data,100);
+      return(0);
+}
+
 if (key1!=NULL &&  strcmp(key,"outherDirInclude")==0 && atoi(key1)>0 && atoi(key1)<20)
 {
       strncpy(mf1->outherDirInclude[atoi(key1)],data,100);

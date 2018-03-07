@@ -42,6 +42,10 @@ parseItemArray(char *padre, cJSON *item,int contador,mf2_t *mf2)
      && contador <20)
        sprintf(mf2->includes[contador],"%.*s",100,item->valuestring);
 
+ if (    strcmp(padre,"proyectos")==0
+     && contador <20)
+       sprintf(mf2->proyectos[contador],"%.*s",100,item->valuestring);
+
  if (    strcmp(padre,"outherDirInclude")==0
      && contador <20)
        sprintf(mf2->outherDirInclude[contador],"%.*s",100,item->valuestring);
@@ -49,6 +53,10 @@ parseItemArray(char *padre, cJSON *item,int contador,mf2_t *mf2)
  if (    strcmp(padre,"includesForInstall")==0
      && contador <20)
        sprintf(mf2->includesForInstall[contador],"%.*s",100,item->valuestring);
+
+ if (    strcmp(padre,"test")==0
+     && contador <20)
+       sprintf(mf2->test[contador],"%.*s",100,item->valuestring);
 }
 
 void parse_object(cJSON *item, char *padre, int tipoPadre,mf2_t *mf2)

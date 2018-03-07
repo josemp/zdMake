@@ -47,6 +47,14 @@ count++;
 
 
 
+if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
+fprintf(ou,"\"name\":\"%s\"",mfGeneric->name);
+count++;
+
+
+
+
+
 
 if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
 fprintf(ou,"\"fuentes\":[");

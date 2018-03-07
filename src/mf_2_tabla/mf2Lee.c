@@ -134,6 +134,33 @@ if (strcmp(label,"includes")==0)
 
 
 
+// LISTA proyectos
+if (strcmp(label,"proyectos")==0)
+ {
+  int i=0;
+  while(1)
+   {
+    campo=resto;
+    pun=memchr(resto,':',strlen(resto));
+    if(pun) *pun=0;
+    mf2Trunca(campo,100);
+    mf2LimpiaBuf(campo);
+    strcpy(mf2->proyectos[i],campo);
+    i++;
+    if (!pun) break; 
+    pun++;
+    if (strlen(pun)==0) break;
+    resto=pun;
+   }// end while
+  continue;
+ }
+
+
+
+
+
+
+
 // LISTA outherDirInclude
 if (strcmp(label,"outherDirInclude")==0)
  {
@@ -208,6 +235,33 @@ if (strcmp(label,"outputIncludeInstall")==0)
     mf2LimpiaBuf(resto);
    strcpy(mf2->outputIncludeInstall,resto);
    continue;
+ }
+
+
+
+
+
+
+
+// LISTA test
+if (strcmp(label,"test")==0)
+ {
+  int i=0;
+  while(1)
+   {
+    campo=resto;
+    pun=memchr(resto,':',strlen(resto));
+    if(pun) *pun=0;
+    mf2Trunca(campo,100);
+    mf2LimpiaBuf(campo);
+    strcpy(mf2->test[i],campo);
+    i++;
+    if (!pun) break; 
+    pun++;
+    if (strlen(pun)==0) break;
+    resto=pun;
+   }// end while
+  continue;
  }
 
 
@@ -377,6 +431,33 @@ if (!campo) continue;
 
 
 
+// LISTA proyectos
+for (i=0;i<20;i++)
+ {
+   campo=resto; // esto para chequear el break despues del for
+   if (!resto) break;  
+   campo=resto;
+   pun=memchr(resto,':',strlen(resto));
+   if (pun)
+    {
+     *pun=0;
+     pun++;
+     resto=pun;
+    }
+   else
+    resto=NULL;
+
+   mf2Trunca(campo,100);
+   mf2LimpiaBuf(campo);
+   strcpy(mf2->proyectos[i],campo);
+ }
+// si hay un break arriba, hay que hacer un continue, pero sino no hay que hacerlo, pues puede ser el ultimo de la linea, uso el campo para eso
+if (!campo) continue;  
+
+
+
+
+
 // LISTA outherDirInclude
 for (i=0;i<20;i++)
  {
@@ -466,6 +547,33 @@ else
 
 
 
+
+// LISTA test
+for (i=0;i<20;i++)
+ {
+   campo=resto; // esto para chequear el break despues del for
+   if (!resto) break;  
+   campo=resto;
+   pun=memchr(resto,':',strlen(resto));
+   if (pun)
+    {
+     *pun=0;
+     pun++;
+     resto=pun;
+    }
+   else
+    resto=NULL;
+
+   mf2Trunca(campo,100);
+   mf2LimpiaBuf(campo);
+   strcpy(mf2->test[i],campo);
+ }
+// si hay un break arriba, hay que hacer un continue, pero sino no hay que hacerlo, pues puede ser el ultimo de la linea, uso el campo para eso
+if (!campo) continue;  
+
+
+
+
 if (numItems==0) *mf2Lista=malloc(sizeof(mf2_t));
 else *mf2Lista=realloc(*mf2Lista,(numItems+1)*sizeof(mf2_t));
 (*mf2Lista)[numItems]=*mf2;
@@ -504,11 +612,15 @@ for (i=0;i<20;i++)
 for (i=0;i<20;i++)
   printf("includes[i] = %s\n",mf2->includes[i]);
 for (i=0;i<20;i++)
+  printf("proyectos[i] = %s\n",mf2->proyectos[i]);
+for (i=0;i<20;i++)
   printf("outherDirInclude[i] = %s\n",mf2->outherDirInclude[i]);
 for (i=0;i<20;i++)
   printf("includesForInstall[i] = %s\n",mf2->includesForInstall[i]);
 printf("outputLibInstall = %s\n",mf2->outputLibInstall);
 printf("outputIncludeInstall = %s\n",mf2->outputIncludeInstall);
+for (i=0;i<20;i++)
+  printf("test[i] = %s\n",mf2->test[i]);
 }
 
 
@@ -558,6 +670,16 @@ fprintf(ou,"\n");
 
 
 
+fprintf(ou,"\n# Lista de directorios de proyectos dependientes[20]\n");
+fprintf(ou,"proyectos");
+for (i=0;i<20;i++)
+  fprintf(ou,":%s",mf2->proyectos[i]);
+fprintf(ou,"\n");
+
+
+
+
+
 fprintf(ou,"\n# Lista de otros includes[20]\n");
 fprintf(ou,"outherDirInclude");
 for (i=0;i<20;i++)
@@ -587,6 +709,16 @@ fprintf(ou,"outputLibInstall:%s\n",mf2->outputLibInstall);
 
 fprintf(ou,"\n# Directorio de inst includes\n");
 fprintf(ou,"outputIncludeInstall:%s\n",mf2->outputIncludeInstall);
+
+
+
+
+
+fprintf(ou,"\n# Lista de files *.tab que compila test[20]\n");
+fprintf(ou,"test");
+for (i=0;i<20;i++)
+  fprintf(ou,":%s",mf2->test[i]);
+fprintf(ou,"\n");
 
 
 

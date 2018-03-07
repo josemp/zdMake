@@ -11,6 +11,7 @@ typedef struct {
  char name[50+1];  
  char fuentes[20][100+1];  
  char includes[20][100+1];  
+ char proyectos[20][100+1];  
  char outherDirInclude[20][100+1];  
  char outherDirLib[20][100+1];  
  char outherLibs[20][100+1]; 

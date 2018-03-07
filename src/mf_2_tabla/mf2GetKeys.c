@@ -53,6 +53,12 @@ if (key1!=NULL &&  strcmp(key,"includes")==0 && atoi(key1)>0 && atoi(key1)<20)
       return(0);
 }
 
+if (key1!=NULL &&  strcmp(key,"proyectos")==0 && atoi(key1)>0 && atoi(key1)<20)
+{
+      strncpy(mf2->proyectos[atoi(key1)],data,100);
+      return(0);
+}
+
 if (key1!=NULL &&  strcmp(key,"outherDirInclude")==0 && atoi(key1)>0 && atoi(key1)<20)
 {
       strncpy(mf2->outherDirInclude[atoi(key1)],data,100);
@@ -74,6 +80,12 @@ if (key1==NULL &&  strcmp(key,"outputIncludeInstall")==0)
       strncpy(mf2->outputIncludeInstall,data,200);
       return(0);
     }
+
+if (key1!=NULL &&  strcmp(key,"test")==0 && atoi(key1)>0 && atoi(key1)<20)
+{
+      strncpy(mf2->test[atoi(key1)],data,100);
+      return(0);
+}
 
 }// End function
 

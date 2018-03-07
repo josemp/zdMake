@@ -134,6 +134,33 @@ if (strcmp(label,"includes")==0)
 
 
 
+// LISTA proyectos
+if (strcmp(label,"proyectos")==0)
+ {
+  int i=0;
+  while(1)
+   {
+    campo=resto;
+    pun=memchr(resto,':',strlen(resto));
+    if(pun) *pun=0;
+    mf1Trunca(campo,100);
+    mf1LimpiaBuf(campo);
+    strcpy(mf1->proyectos[i],campo);
+    i++;
+    if (!pun) break; 
+    pun++;
+    if (strlen(pun)==0) break;
+    resto=pun;
+   }// end while
+  continue;
+ }
+
+
+
+
+
+
+
 // LISTA outherDirInclude
 if (strcmp(label,"outherDirInclude")==0)
  {
@@ -376,6 +403,33 @@ if (!campo) continue;
 
 
 
+// LISTA proyectos
+for (i=0;i<20;i++)
+ {
+   campo=resto; // esto para chequear el break despues del for
+   if (!resto) break;  
+   campo=resto;
+   pun=memchr(resto,':',strlen(resto));
+   if (pun)
+    {
+     *pun=0;
+     pun++;
+     resto=pun;
+    }
+   else
+    resto=NULL;
+
+   mf1Trunca(campo,100);
+   mf1LimpiaBuf(campo);
+   strcpy(mf1->proyectos[i],campo);
+ }
+// si hay un break arriba, hay que hacer un continue, pero sino no hay que hacerlo, pues puede ser el ultimo de la linea, uso el campo para eso
+if (!campo) continue;  
+
+
+
+
+
 // LISTA outherDirInclude
 for (i=0;i<20;i++)
  {
@@ -494,6 +548,8 @@ for (i=0;i<20;i++)
 for (i=0;i<20;i++)
   printf("includes[i] = %s\n",mf1->includes[i]);
 for (i=0;i<20;i++)
+  printf("proyectos[i] = %s\n",mf1->proyectos[i]);
+for (i=0;i<20;i++)
   printf("outherDirInclude[i] = %s\n",mf1->outherDirInclude[i]);
 for (i=0;i<20;i++)
   printf("outherDirLib[i] = %s\n",mf1->outherDirLib[i]);
@@ -542,6 +598,16 @@ fprintf(ou,"\n# Lista de includes[20]\n");
 fprintf(ou,"includes");
 for (i=0;i<20;i++)
   fprintf(ou,":%s",mf1->includes[i]);
+fprintf(ou,"\n");
+
+
+
+
+
+fprintf(ou,"\n# Lista de proyectos dependientes[20]\n");
+fprintf(ou,"proyectos");
+for (i=0;i<20;i++)
+  fprintf(ou,":%s",mf1->proyectos[i]);
 fprintf(ou,"\n");
 
 

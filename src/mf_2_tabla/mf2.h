@@ -11,10 +11,12 @@ typedef struct {
  char name[50+1];  
  char fuentes[20][100+1];  
  char includes[20][100+1];  
+ char proyectos[20][100+1];  
  char outherDirInclude[20][100+1];  
  char includesForInstall[20][100+1];   
  char outputLibInstall[200+1];   
- char outputIncludeInstall[200+1]; 
+ char outputIncludeInstall[200+1];  
+ char test[20][100+1]; 
 } mf2_t;
 
 /*  Estructura de la tabla List mf2  */ 

@@ -7,7 +7,8 @@
 
 typedef struct {  
  char tipoTabla[10+1];   
- char versionTabla[10+1];  
+ char versionTabla[10+1];   
+ char name[50+1];  
  char fuentes[20][100+1];  
  char includesForInstall[20][100+1]; 
 } mfGeneric_t;

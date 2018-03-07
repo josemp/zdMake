@@ -3,13 +3,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <memory.h>
+#include <libgen.h>
 #include "mf2.h"
 #include "metaTab.h"
+#include "zdMakeTabUtil.h"
 
 metaTab_t *getMetaTab_mf2();
 int mf2Lee(char *nombre, mf2_t *mf2);
 int _mf2GeneraMakefile(mf2_t *mf2,char *nombreFicheroOutput );
 
+char *pathSufijo(char *pathOriginal,char *descriError,char*output);
+char *pathDir(char *pathOriginal,char *descriError,char *output);
 
 int mf2GeneraMakefile(char *nombreFicheroInput, char *nombreFicheroOutput)
 {
@@ -51,6 +55,13 @@ fprintf(ou,"\n");
 fprintf(ou,"\n# directorios de includes externos\n\n");
 
 fprintf(ou,"OUTHER_DIR_INCLUDE :=");
+// los proyectos tambien tienen que ser directorios de include
+for(i=0;i<20;i++)
+{
+   if (strlen(mf2->proyectos[i])<3) continue;
+      fprintf(ou," %s",mf2->proyectos[i]);
+}
+
 for(i=0;i<20;i++)
    if (strlen(mf2->outherDirInclude[i])!=0)
       fprintf(ou," %s",mf2->outherDirInclude[i]);
@@ -82,6 +93,22 @@ fprintf(ou,"\t ar -rf $@ $^\n");
 
 fprintf(ou,"\nclean:\n");
 fprintf(ou,"\t - rm -f $(OBJETOS) $(LIBRARY_NAME)\n");
+// clean los test
+for (i=0;i<20;i++)
+{
+
+   char sufijoData[200];
+   char *sufijo;
+   char dirName[200];
+   sufijo=pathSufijo(mf2->test[i],"test",sufijoData);
+   if (sufijo==NULL) continue; 
+   pathDir(mf2->test[i],"test",dirName);
+   if (strlen(sufijo)==0)
+      fprintf(ou,"\tmake -C %s clean\n",dirName);
+   else
+      fprintf(ou,"\tmake -C %s makefile%s clean\n",dirName,sufijo);
+}
+
 
 fprintf(ou,"install:\n");
 fprintf(ou,"\t- mkdir -p $(OUTPUT_LIB_INSTALL)\n");
@@ -89,11 +116,55 @@ fprintf(ou,"\t- mkdir -p $(OUTPUT_INCLUDE_INSTALL)\n");
 fprintf(ou,"\tcp $(LIBRARY_NAME) $(OUTPUT_LIB_INSTALL)\n");
 fprintf(ou,"\tcp $(INCLUDES_FOR_INSTALL) $(OUTPUT_INCLUDE_INSTALL)\n");
 
+
+// Ahora los test
+
+fprintf(ou,"\ntest:\n");
+for (i=0;i<20;i++)
+{
+   char sufijoData[200];
+   char *sufijo;
+   char dirName[200];
+   sufijo=pathSufijo(mf2->test[i],"test",sufijoData);
+   if (sufijo==NULL) continue; 
+   pathDir(mf2->test[i],"test",dirName);
+   if (strlen(sufijo)==0)
+      fprintf(ou,"\tmake -C %s\n",dirName);
+   else
+      fprintf(ou,"\tmake -C %s makefile%s\n",dirName,sufijo);
+}
 fclose(ou);
 return(0);
 
 
 }
+
+char *pathSufijo(char *pathOriginal,char *descriError,char *output)
+{
+ char path[200+1];
+ char *sufijo;
+   strcpy(path,pathOriginal);
+   if (strlen(path)==0) return(NULL);
+   if (strlen(path)<6) {printf("%s <%s> no valido\n",descriError,pathOriginal);return(NULL);}
+   sufijo=zdMakeSufijo(path);
+   if (sufijo==NULL) 
+   {printf("%s  = <%s> no valido\n",descriError,pathOriginal);return(NULL);}
+   strcpy(output,sufijo);
+   return(output);
+}
+char *pathDir(char *pathOriginal,char *descriError,char *output)
+{
+ char path[201];
+ char *dirName;
+ strcpy(path,pathOriginal);
+   if (strlen(path)==0) return(NULL);
+   if (strlen(path)<6) {printf("%s <%s> no valido\n",descriError,pathOriginal);return(NULL);}
+   dirName=dirname(path);
+   if (dirName==NULL) 
+   {printf("%s  = <%s> no valido\n",descriError,pathOriginal);return(NULL);}
+   strcpy(output,dirName);
+}
+
 
 int mf2GeneraTabla(char *namefile,char *tipo,char *version)
 {
@@ -125,6 +196,7 @@ for (i=0;i<tabla->numItems;i++)
  if (tabla->item[i].tipo=='L')
   {
       itemLista=tabla->item[i].data;
+      fprintf(ou,"#%s\n",itemLista->descri);
       fprintf(ou,"%s: ... : ...\n",itemLista->nombre);
   }
 

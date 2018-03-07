@@ -85,6 +85,20 @@ count++;
 
 
 if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
+fprintf(ou,"\"proyectos\":[");
+for (i=0;i<20;i++)
+ {
+  if (i>0) fprintf(ou,",");
+  fprintf(ou,"\"%s\"",mf2->proyectos[i]);
+ }
+fprintf(ou,"]");
+count++;
+
+
+
+
+
+if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
 fprintf(ou,"\"outherDirInclude\":[");
 for (i=0;i<20;i++)
  {
@@ -123,6 +137,20 @@ if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
 fprintf(ou,"\"outputIncludeInstall\":\"%s\"",mf2->outputIncludeInstall);
 count++;
 
+
+
+
+
+
+if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
+fprintf(ou,"\"test\":[");
+for (i=0;i<20;i++)
+ {
+  if (i>0) fprintf(ou,",");
+  fprintf(ou,"\"%s\"",mf2->test[i]);
+ }
+fprintf(ou,"]");
+count++;
 
 
 

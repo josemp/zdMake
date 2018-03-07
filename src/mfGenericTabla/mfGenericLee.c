@@ -65,6 +65,20 @@ if (strcmp(label,"versionTabla")==0)
 
 
 
+// Char name
+if (strcmp(label,"name")==0)
+ {
+    mfGenericTrunca(resto,50);
+    mfGenericLimpiaBuf(resto);
+   strcpy(mfGeneric->name,resto);
+   continue;
+ }
+
+
+
+
+
+
 
 // LISTA fuentes
 if (strcmp(label,"fuentes")==0)
@@ -209,6 +223,24 @@ else
 
 
 
+
+// Char name
+if (!resto) continue;  
+campo=resto;
+pun=memchr(resto,':',strlen(resto));
+if (pun)
+ {
+  *pun=0; pun++; resto=pun;
+ }
+else
+ resto=NULL;
+    mfGenericTrunca(campo,50);
+    mfGenericLimpiaBuf(campo);
+   strcpy(mfGeneric->name,campo);
+
+
+
+
 // LISTA fuentes
 for (i=0;i<20;i++)
  {
@@ -294,6 +326,7 @@ mfGenericPinta(mfGeneric_t *mfGeneric)
 int i;
 printf("tipoTabla = %s\n",mfGeneric->tipoTabla);
 printf("versionTabla = %s\n",mfGeneric->versionTabla);
+printf("name = %s\n",mfGeneric->name);
 for (i=0;i<20;i++)
   printf("fuentes[i] = %s\n",mfGeneric->fuentes[i]);
 for (i=0;i<20;i++)
@@ -315,6 +348,13 @@ fprintf(ou,"tipoTabla:%s\n",mfGeneric->tipoTabla);
 
 fprintf(ou,"\n# Version de la tabla\n");
 fprintf(ou,"versionTabla:%s\n",mfGeneric->versionTabla);
+
+
+
+
+
+fprintf(ou,"\n# Nombre del output\n");
+fprintf(ou,"name:%s\n",mfGeneric->name);
 
 
 

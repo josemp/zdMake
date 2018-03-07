@@ -14,6 +14,9 @@ parseString(cJSON *item,mfGeneric_t *mfGeneric)
 
  if (strcmp(item->string,"versionTabla")==0)
        sprintf(mfGeneric->versionTabla,"%.*s",10,item->valuestring);
+
+ if (strcmp(item->string,"name")==0)
+       sprintf(mfGeneric->name,"%.*s",50,item->valuestring);
 }
 
 // Los campos de objeto

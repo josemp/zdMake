@@ -35,6 +35,11 @@ if (key1==NULL &&  strcmp(key,"versionTabla")==0)
       strncpy(mfGeneric->versionTabla,data,10);
       return(0);
     }
+if (key1==NULL &&  strcmp(key,"name")==0)
+    {
+      strncpy(mfGeneric->name,data,50);
+      return(0);
+    }
 
 if (key1!=NULL &&  strcmp(key,"fuentes")==0 && atoi(key1)>0 && atoi(key1)<20)
 {
