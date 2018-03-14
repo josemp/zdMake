@@ -57,6 +57,20 @@ count++;
 
 
 if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
+fprintf(ou,"\"includesForInstall\":[");
+for (i=0;i<20;i++)
+ {
+  if (i>0) fprintf(ou,",");
+  fprintf(ou,"\"%s\"",mfB->includesForInstall[i]);
+ }
+fprintf(ou,"]");
+count++;
+
+
+
+
+
+if (count==0) fprintf(ou,"\n"); else fprintf(ou,",\n");
 fprintf(ou,"\"directorios\":[");
 for (i=0;i<20;i++)
  {

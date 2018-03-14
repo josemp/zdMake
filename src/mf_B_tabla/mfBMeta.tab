@@ -1,6 +1,7 @@
 tipoTabla:C:Tipo de la tabla:10
 versionTabla:C:Version de la tabla:10
 name:C:Nombre de la libreria:50
+includesForInstall:L:Lista de includes (fuera de proyectos) para instalar:20:100
 directorios:L:Lista de fuentes:20:100
 outputLibInstall:C:Directorio de instalacion:200
 outputIncludeInstall:C:Directorio de inst includes:200

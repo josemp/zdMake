@@ -100,6 +100,22 @@ for(i=0;i<20;i++)
       fprintf(ou," %s",mf1->outherLibs[i]);
 fprintf(ou,"\n");
 
+
+//LIBRERIAS DE LAS QUE DEPENDE TEST, SI ESTAS LIBRERIAS CAMBIAN SE COMPILARA TEST, SI ESTAS LIBRERIAS NO EXISTEN, ERROR EN COMPILACION
+
+fprintf(ou,"DEPEND_LIBS:= ");
+for(i=0;i<20;i++)
+{
+   if (strlen(mf1->proyectos[i])==0) continue;
+   // Escogemos el nombre de la libreria
+   sprintf(tabFile,"%s/make.tab",mf1->proyectos[i]);
+   memset(&mfGeneric,0,sizeof(mfGeneric_t));
+   if (mfGenericLee(tabFile,&mfGeneric)<0) continue;
+     fprintf(ou," lib%s.a",mfGeneric.name);
+}
+fprintf(ou,"\n");
+
+
 fprintf(ou,"\n# variables intermedias\n\n");
 
 
@@ -109,7 +125,7 @@ fprintf(ou,"LDLIBS =     $(OUTHER_LIBS)\n");
 fprintf(ou,"OBJETOS      := $(FUENTES:%%.c=%%.o)\n");
 fprintf(ou,"\n# -------- RULES ------------------\n\n");
 fprintf(ou,"all: $(NAME)\n");
-fprintf(ou,"$(OBJETOS):$(FUENTES) $(INCLUDES)\n");
+fprintf(ou,"$(OBJETOS):$(FUENTES) $(INCLUDES) $(DEPEND_LIBS)\n");
 fprintf(ou,"$(NAME): $(OBJETOS)\n");
 fprintf(ou,"\t$(CC) $(LDFLAGS)  $(OBJETOS) $(LDLIBS) -o $(NAME)\n");
 fprintf(ou,"\nclean:\n");

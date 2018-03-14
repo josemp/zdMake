@@ -92,6 +92,10 @@ for(i=0;i<20;i++)
      fprintf(ou," %s",includeFile);
     }
 }
+for(i=0;i<20;i++)
+   if (strlen(mfB->includesForInstall[i])!=0)
+      fprintf(ou," %s",mfB->includesForInstall[i]);
+
 fprintf(ou,"\n\n");
 fprintf(ou,"\n# install directorios\n\n");
 

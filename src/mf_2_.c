@@ -104,7 +104,7 @@ for (i=0;i<20;i++)
    if (strlen(sufijo)==0)
       fprintf(ou,"\tmake -C %s clean\n",dirName);
    else
-      fprintf(ou,"\tmake -C %s makefile%s clean\n",dirName,sufijo);
+      fprintf(ou,"\tmake -C %s -f makefile%s clean\n",dirName,sufijo);
 }
 
 
@@ -117,7 +117,7 @@ fprintf(ou,"\tcp $(INCLUDES_FOR_INSTALL) $(OUTPUT_INCLUDE_INSTALL)\n");
 
 // Ahora los test
 
-fprintf(ou,"\ntest:\n");
+fprintf(ou,"\ntest: $(LIBRARY_NAME)\n");
 for (i=0;i<20;i++)
 {
    char sufijoData[200];
@@ -129,7 +129,7 @@ for (i=0;i<20;i++)
    if (strlen(sufijo)==0)
       fprintf(ou,"\tmake -C %s\n",dirName);
    else
-      fprintf(ou,"\tmake -C %s makefile%s\n",dirName,sufijo);
+      fprintf(ou,"\tmake -C %s -f makefile%s\n",dirName,sufijo);
 }
 fclose(ou);
 return(0);

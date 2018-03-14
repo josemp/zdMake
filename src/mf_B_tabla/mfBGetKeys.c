@@ -41,6 +41,12 @@ if (key1==NULL &&  strcmp(key,"name")==0)
       return(0);
     }
 
+if (key1!=NULL &&  strcmp(key,"includesForInstall")==0 && atoi(key1)>0 && atoi(key1)<20)
+{
+      strncpy(mfB->includesForInstall[atoi(key1)],data,100);
+      return(0);
+}
+
 if (key1!=NULL &&  strcmp(key,"directorios")==0 && atoi(key1)>0 && atoi(key1)<20)
 {
       strncpy(mfB->directorios[atoi(key1)],data,100);

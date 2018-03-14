@@ -34,6 +34,10 @@ parseItemObjeto(char *padre, cJSON *item,mfB_t *mfB)
 
 parseItemArray(char *padre, cJSON *item,int contador,mfB_t *mfB)
 { 
+ if (    strcmp(padre,"includesForInstall")==0
+     && contador <20)
+       sprintf(mfB->includesForInstall[contador],"%.*s",100,item->valuestring);
+
  if (    strcmp(padre,"directorios")==0
      && contador <20)
        sprintf(mfB->directorios[contador],"%.*s",100,item->valuestring);

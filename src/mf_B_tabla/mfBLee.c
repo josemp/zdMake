@@ -80,6 +80,33 @@ if (strcmp(label,"name")==0)
 
 
 
+// LISTA includesForInstall
+if (strcmp(label,"includesForInstall")==0)
+ {
+  int i=0;
+  while(1)
+   {
+    campo=resto;
+    pun=memchr(resto,':',strlen(resto));
+    if(pun) *pun=0;
+    mfBTrunca(campo,100);
+    mfBLimpiaBuf(campo);
+    strcpy(mfB->includesForInstall[i],campo);
+    i++;
+    if (!pun) break; 
+    pun++;
+    if (strlen(pun)==0) break;
+    resto=pun;
+   }// end while
+  continue;
+ }
+
+
+
+
+
+
+
 // LISTA directorios
 if (strcmp(label,"directorios")==0)
  {
@@ -242,6 +269,33 @@ else
 
 
 
+// LISTA includesForInstall
+for (i=0;i<20;i++)
+ {
+   campo=resto; // esto para chequear el break despues del for
+   if (!resto) break;  
+   campo=resto;
+   pun=memchr(resto,':',strlen(resto));
+   if (pun)
+    {
+     *pun=0;
+     pun++;
+     resto=pun;
+    }
+   else
+    resto=NULL;
+
+   mfBTrunca(campo,100);
+   mfBLimpiaBuf(campo);
+   strcpy(mfB->includesForInstall[i],campo);
+ }
+// si hay un break arriba, hay que hacer un continue, pero sino no hay que hacerlo, pues puede ser el ultimo de la linea, uso el campo para eso
+if (!campo) continue;  
+
+
+
+
+
 // LISTA directorios
 for (i=0;i<20;i++)
  {
@@ -338,6 +392,8 @@ printf("tipoTabla = %s\n",mfB->tipoTabla);
 printf("versionTabla = %s\n",mfB->versionTabla);
 printf("name = %s\n",mfB->name);
 for (i=0;i<20;i++)
+  printf("includesForInstall[i] = %s\n",mfB->includesForInstall[i]);
+for (i=0;i<20;i++)
   printf("directorios[i] = %s\n",mfB->directorios[i]);
 printf("outputLibInstall = %s\n",mfB->outputLibInstall);
 printf("outputIncludeInstall = %s\n",mfB->outputIncludeInstall);
@@ -365,6 +421,16 @@ fprintf(ou,"versionTabla:%s\n",mfB->versionTabla);
 
 fprintf(ou,"\n# Nombre de la libreria\n");
 fprintf(ou,"name:%s\n",mfB->name);
+
+
+
+
+
+fprintf(ou,"\n# Lista de includes (fuera de proyectos) para instalar[20]\n");
+fprintf(ou,"includesForInstall");
+for (i=0;i<20;i++)
+  fprintf(ou,":%s",mfB->includesForInstall[i]);
+fprintf(ou,"\n");
 
 
 
