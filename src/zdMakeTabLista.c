@@ -1,3 +1,6 @@
+/* Fichero con la lista de tipo de makes */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

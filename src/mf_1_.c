@@ -5,10 +5,12 @@
 #include <memory.h>
 #include "mf1.h"
 #include "metaTab.h"
+#include "mfGeneric.h"
 
 metaTab_t *getMetaTab_mf1();
 int mf1Lee(char *nombre, mf1_t *mf1);
 int _mf1GeneraMakefile(mf1_t *mf1,char *nombreFicheroOutput );
+int mfGenericLee(char *nombreFichero,mfGeneric_t *mfGeneric);
 
 
 int mf1GeneraMakefile(char *nombreFicheroInput, char *nombreFicheroOutput)
@@ -27,6 +29,8 @@ return(0);
 int _mf1GeneraMakefile(mf1_t *mf1,char *nombreFicheroOutput )
 {
 int i;
+char tabFile[200];
+mfGeneric_t mfGeneric;
 printf("al ataquer\n");
 FILE *ou= fopen(nombreFicheroOutput,"w");
 if (!ou) return(-1);
@@ -51,12 +55,26 @@ fprintf(ou,"\n");
 fprintf(ou,"\n# directorios de includes externos\n\n");
 
 fprintf(ou,"OUTHER_DIR_INCLUDE :=");
+// los proyectos tambien tienen que ser directorios de include
+for(i=0;i<20;i++)
+{
+   if (strlen(mf1->proyectos[i])<1) continue; // un proyecto puede ser el "."
+      fprintf(ou," %s",mf1->proyectos[i]);
+}
+
 for(i=0;i<20;i++)
    if (strlen(mf1->outherDirInclude[i])!=0)
       fprintf(ou," %s",mf1->outherDirInclude[i]);
 fprintf(ou,"\n\n");
 
+
 fprintf(ou,"OUTHER_DIR_LIB:=");
+// los proyectos tambien tienen que ser directorios de LIB
+for(i=0;i<20;i++)
+{
+   if (strlen(mf1->proyectos[i])<1) continue; // un proyecto puede ser el "."
+      fprintf(ou," %s",mf1->proyectos[i]);
+}
 for(i=0;i<20;i++)
    if (strlen(mf1->outherDirLib[i])!=0)
       fprintf(ou," %s",mf1->outherDirLib[i]);
@@ -65,6 +83,18 @@ fprintf(ou,"\n");
 fprintf(ou,"\n# librerias utilizadas\n\n");
 
 fprintf(ou,"OUTHER_LIBS:= ");
+
+// De los proyectos vamos a sacar las librerias necesarias
+for(i=0;i<20;i++)
+{
+   if (strlen(mf1->proyectos[i])==0) continue;
+   // Escogemos el nombre de la libreria
+   sprintf(tabFile,"%s/make.tab",mf1->proyectos[i]);
+   memset(&mfGeneric,0,sizeof(mfGeneric_t));
+   if (mfGenericLee(tabFile,&mfGeneric)<0) continue;
+     fprintf(ou," -l%s",mfGeneric.name);
+}
+
 for(i=0;i<20;i++)
    if (strlen(mf1->outherLibs[i])!=0)
       fprintf(ou," %s",mf1->outherLibs[i]);
@@ -120,6 +150,7 @@ for (i=0;i<tabla->numItems;i++)
  if (tabla->item[i].tipo=='L')
   {
       itemLista=tabla->item[i].data;
+      fprintf(ou,"#%s\n",itemLista->descri);
       fprintf(ou,"%s: ... : ...\n",itemLista->nombre);
   }
 
