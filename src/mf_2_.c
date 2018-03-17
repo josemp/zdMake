@@ -56,7 +56,7 @@ fprintf(ou,"OUTHER_DIR_INCLUDE :=");
 // los proyectos tambien tienen que ser directorios de include
 for(i=0;i<20;i++)
 {
-   if (strlen(mf2->proyectos[i])<3) continue;
+   if (strlen(mf2->proyectos[i])<1) continue;
       fprintf(ou," %s",mf2->proyectos[i]);
 }
 
