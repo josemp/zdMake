@@ -3,7 +3,7 @@ versionTabla:C:Version de la tabla:10
 name:C:Nombre del output:50
 fuentes:L:Lista de fuentes:20:100
 includes:L:Lista de includes:20:100
-proyectos:L:Lista de proyectos dependientes:20:100
+proyectos:L:Lista de directorios con make.tab, proyectos dependientes:20:100
 outherDirInclude:L:Lista de otros includes:20:100
 outherDirLib:L:Lista de otros Dir de libreria:20:100
 outherLibs:L:Lista de otras librerias:20:100

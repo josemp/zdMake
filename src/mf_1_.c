@@ -111,7 +111,7 @@ for(i=0;i<20;i++)
    sprintf(tabFile,"%s/make.tab",mf1->proyectos[i]);
    memset(&mfGeneric,0,sizeof(mfGeneric_t));
    if (mfGenericLee(tabFile,&mfGeneric)<0) continue;
-     fprintf(ou," lib%s.a",mfGeneric.name);
+     fprintf(ou," %s/lib%s.a",mf1->proyectos[i],mfGeneric.name);
 }
 fprintf(ou,"\n");
 
