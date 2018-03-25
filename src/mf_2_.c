@@ -83,7 +83,7 @@ fprintf(ou,"CFLAGS = $(OUTHER_DIR_INCLUDE:%%=-I%%)\n");
 fprintf(ou,"OBJETOS      := $(FUENTES:%%.c=%%.o)\n");
 fprintf(ou,"\n# -------- RULES ------------------\n\n");
 fprintf(ou,"all: $(LIBRARY_NAME)\n");
-fprintf(ou,"$(OBJETOS):$(FUENTEOS) $(INCLUDES)\n");
+fprintf(ou,"$(OBJETOS):$(FUENTES) $(INCLUDES)\n");
 
 fprintf(ou,"\n$(LIBRARY_NAME): $(OBJETOS)\n");
 fprintf(ou,"\t- rm -f $(LIBRARY_NAME)\n");
