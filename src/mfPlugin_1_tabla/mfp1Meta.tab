@@ -1,0 +1,49 @@
+#descripcion: este plugin es para intentar compilar con un generador de includes
+#   T2I = ./template2Include
+#   %.h: %.template
+#        $(T2I) $<
+#   
+#
+#
+# el name es el nombre del programa, por ejemplo T2I, no se puede cambiar
+name:C: Nombre del generador de includes, ejemplo T2I:200
+
+#En nuestro el programa es ./template2Include, se tiene que poder cambiar
+program:C:El programa Generador:200
+
+#El source file en nuestro caso  son los .template , el destino  %.h, no se puede cambiar
+sourceFile:C: los source files, algo asi como en el caso inicial son .template los destinos son .h:2:200
+regla:C:En el caso es $(T2I) $<, pero podria ser otro:200
+includes:C: el campo donde se anadiran los includes, por ejemplo includesTemplate:200
+
+
+
+
+#
+# hay que tener en cuenta que este caso es muy especial
+#
+# en los otros mf_? hay que anadir un campo plugin: que tendra el numero de este plugin que es el 1
+# en los otros mf_? hay que anadir un campo programa: que tendra el programa que controla este plugin
+# en los otros mf_? hay que anadir un campo con el nombre del que se ponga en  la etiqueta includes  por ejemplo includesTemplate
+# ejemplo:
+# tabla de este plugin:
+#
+#    name: T2I
+#    regla: $<
+#    label:T2I_Includes
+#
+#   make.tab:
+#
+#   plugin:1                    (esto es una lista)
+#   pluginProgram:template2Include    (esto es una lista)
+#   pluginSource:template             (esto es una lista)
+#   T2I_Includes: yoquese1.h : yoquese2.h   
+#
+#  makefile:
+#   T2I1 = template2Include   (El T2I viene del "name" que pongamos a este plugin y el 1 viene del numero de orden en la lista de plugines) (el template2Include creo que esta claro)
+#   %.h: %.template           (la palabre template viene del source que hemos puesto a make.tab
+#   	$(T2I1) $<            (Esto es fijo conociendo el nombre del plugin y su orden
+#   T2I1_INCLUDES :=  yoquese1.h : yoquese2.h   ( Los includes de T2I_Includes se anaden como dependencias de compilacion (el mismo camino que los includes))
+#   clean: se han de borrar todos los T2I1_INCLUDES
+#
+
