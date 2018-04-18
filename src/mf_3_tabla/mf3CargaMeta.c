@@ -12,7 +12,7 @@ itemLista_t itemLista_fuentes_mf3={"fuentes","Lista de fuentes",20,100};
 
 itemLista_t itemLista_includes_mf3={"includes","Lista de includes",20,100};
 
-itemLista_t itemLista_proyectos_mf3={"proyectos","Lista de  make.tab, proyectos dependientes",20,100};
+itemLista_t itemLista_proyectos_mf3={"proyectos","Lista de  make.tab, proyectos dependientes",100,100};
 
 itemLista_t itemLista_outherDirInclude_mf3={"outherDirInclude","Lista de otros includes",20,100};
 

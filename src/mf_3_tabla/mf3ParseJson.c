@@ -40,7 +40,7 @@ parseItemArray(char *padre, cJSON *item,int contador,mf3_t *mf3)
        sprintf(mf3->includes[contador],"%.*s",100,item->valuestring);
 
  if (    strcmp(padre,"proyectos")==0
-     && contador <20)
+     && contador <100)
        sprintf(mf3->proyectos[contador],"%.*s",100,item->valuestring);
 
  if (    strcmp(padre,"outherDirInclude")==0

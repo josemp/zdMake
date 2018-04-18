@@ -53,7 +53,7 @@ if (key1!=NULL &&  strcmp(key,"includes")==0 && atoi(key1)>0 && atoi(key1)<20)
       return(0);
 }
 
-if (key1!=NULL &&  strcmp(key,"proyectos")==0 && atoi(key1)>0 && atoi(key1)<20)
+if (key1!=NULL &&  strcmp(key,"proyectos")==0 && atoi(key1)>0 && atoi(key1)<100)
 {
       strncpy(mf3->proyectos[atoi(key1)],data,100);
       return(0);

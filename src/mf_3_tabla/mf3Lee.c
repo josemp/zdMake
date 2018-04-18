@@ -445,7 +445,7 @@ if (!campo) continue;
 
 
 // LISTA proyectos
-for (i=0;i<20;i++)
+for (i=0;i<100;i++)
  {
    campo=resto; // esto para chequear el break despues del for
    if (!resto) break;  
@@ -633,7 +633,7 @@ for (i=0;i<20;i++)
   printf("fuentes[i] = %s\n",mf3->fuentes[i]);
 for (i=0;i<20;i++)
   printf("includes[i] = %s\n",mf3->includes[i]);
-for (i=0;i<20;i++)
+for (i=0;i<100;i++)
   printf("proyectos[i] = %s\n",mf3->proyectos[i]);
 for (i=0;i<20;i++)
   printf("outherDirInclude[i] = %s\n",mf3->outherDirInclude[i]);
@@ -693,9 +693,9 @@ fprintf(ou,"\n");
 
 
 
-fprintf(ou,"\n# Lista de  make.tab, proyectos dependientes[20]\n");
+fprintf(ou,"\n# Lista de  make.tab, proyectos dependientes[100]\n");
 fprintf(ou,"proyectos");
-for (i=0;i<20;i++)
+for (i=0;i<100;i++)
   fprintf(ou,":%s",mf3->proyectos[i]);
 fprintf(ou,"\n");
 
